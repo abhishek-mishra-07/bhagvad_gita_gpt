@@ -62,7 +62,7 @@ def generate_response_chatgpt(question):
         {"role": "user", "content": generate_prompt(question)}
     ]
     )
-    return response.choices[0].text
+    return response['choices'][0]['message']['content']
 
 def get_text():
     input_text = st.text_input("Hello, ask me a question about life and philosophy.",placeholder="Type Your question here.", key=txtInputQuestion)
