@@ -1,5 +1,5 @@
 # BhagwadGitaGPT
-Prerequities : 
+Prerequisites : 
 streamlit
 openai
 steamlit-chat
