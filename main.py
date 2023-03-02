@@ -5,7 +5,7 @@ from streamlit_chat import message
 from PIL import Image
 
 txtInputQuestion = "userQuestion"
-pageTitle = "Bhagwad Gita GPT"
+pageTitle = "Bhagvad Gita GPT"
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
     col1, col2 = st.columns(2)
     with col1:
-        st.title("Bhagwad Gita GPT")
+        st.title("Bhagvad Gita GPT")
     with col2:
         st.image(icon)
     #st.write("test 1")
