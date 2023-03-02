@@ -46,12 +46,21 @@ Answer:""".format(
 
 
 
-def generate_response(question):
+def generate_response_davinci(question):
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=generate_prompt(question),
         temperature=0.6,
         max_tokens=2048
+    )
+    return response.choices[0].text
+
+def generate_response_chatgpt(question):
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+        {"role": "user", "content": generate_prompt(question)}
+    ]
     )
     return response.choices[0].text
 
@@ -104,7 +113,7 @@ if __name__ == '__main__':
 
     print("get_text called.")
     if user_input:
-        output = generate_response(user_input)
+        output = generate_response_chatgpt(user_input)
         # store the output
         st.session_state.past.append(user_input)
         st.session_state.generated.append(output)
