@@ -67,7 +67,6 @@ def page_setup(title, icon):
         }
     )
     st.sidebar.title('Creators :')
-    st.sidebar.write("Abhishek Mishra")
     st.sidebar.markdown('Abhishek Mishra (https://github.com/abhishek-mishra-07)')
     st.sidebar.write("Shubhi Tiwari (https://github.com/tiwariShubhi)")
 
