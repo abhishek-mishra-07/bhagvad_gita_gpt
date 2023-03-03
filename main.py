@@ -33,14 +33,13 @@ def generate_response_davinci(question):
     return response.choices[0].text
 
 def generate_response_chatgpt(question):
-    try:
-        response = openai.ChatCompletion.create(
+    response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
             {"role": "user", "content": generate_prompt(question)}
         ]
         )
-        return response['choices'][0]['message']['content']
+    return response['choices'][0]['message']['content']
 
 def get_text():
     input_text = st.text_input("Hello, ask me a question about life and philosophy.",placeholder="Type Your question here.", key=txtInputQuestion)
