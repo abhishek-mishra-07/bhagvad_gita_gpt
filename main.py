@@ -17,7 +17,7 @@ def clear_text(textInput):
 def generate_prompt(question):
     return """{} 
     Question:{} 
-    Answer:""".format(SYSTEM_PROMPT,
+    Answer:""".format(st.secrets["SYSTEM_PROMPT"],
         question
     )
 
