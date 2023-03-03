@@ -41,12 +41,6 @@ def generate_response_chatgpt(question):
         ]
         )
         return response['choices'][0]['message']['content']
-    except RateLimitError as e:
-        st.error("Rate limit reached. Please try again later.")
-        for i in range(60):
-            time.sleep(1) # Wait for 1 second
-            st.warning(f"Retrying in {60-i} seconds...")
-        return generate_response_chatgpt(question) # Retry the function
 
 def get_text():
     input_text = st.text_input("Hello, ask me a question about life and philosophy.",placeholder="Type Your question here.", key=txtInputQuestion)
