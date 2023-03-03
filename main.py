@@ -3,6 +3,7 @@ import os
 import openai
 from streamlit_chat import message
 from PIL import Image
+import time
 
 txtInputQuestion = "userQuestion"
 pageTitle = "Bhagvad Gita GPT"
@@ -36,13 +37,20 @@ def generate_response_davinci(question):
     return response.choices[0].text
 
 def generate_response_chatgpt(question):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-        {"role": "user", "content": generate_prompt(question)}
-    ]
-    )
-    return response['choices'][0]['message']['content']
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+            {"role": "user", "content": generate_prompt(question)}
+        ]
+        )
+        return response['choices'][0]['message']['content']
+    except RateLimitError as e:
+        st.error("Rate limit reached. Please try again later.")
+        for i in range(60):
+            time.sleep(1) # Wait for 1 second
+            st.warning(f"Retrying in {60-i} seconds...")
+        return generate_response_chatgpt(question) # Retry the function
 
 def get_text():
     input_text = st.text_input("Hello, ask me a question about life and philosophy.",placeholder="Type Your question here.", key=txtInputQuestion)
@@ -55,9 +63,7 @@ def page_setup(title, icon):
         layout='centered',
         initial_sidebar_state='auto',
         menu_items={
-            'Get Help': 'https://streamlit.io/',
-            'Report a bug': 'https://github.com',
-            'About': 'About your application: **Hello world**'
+            'About': 'About your application: **This is Bhagvad Gita GPT, a simple ChatGPT use case demo to show how one can easily leverage openAI APIs to create intelligent conversational experiences related to a specific topic.**'
         }
     )
     st.sidebar.title('Creators :')
