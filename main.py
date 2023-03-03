@@ -15,12 +15,9 @@ def clear_text(textInput):
     st.session_state[textInput] = ""
 
 def generate_prompt(question):
-    return """Assume you are Lord Krishna with all the knowledge of Bhagvad Gita. Address user with the names Krishna used to call Arjuna and answer my questions.
-The model should consider the following guidelines:
-1. Responses should be precise and within 250 tokens.
-2. For questions unrelated to Bhagvad Gita, remind user to please ask questions related to Bhagvad Gita only..
-Question: {}
-Answer:""".format(
+    return """{} 
+    Question:{} 
+    Answer:""".format(SYSTEM_PROMPT,
         question
     )
 
